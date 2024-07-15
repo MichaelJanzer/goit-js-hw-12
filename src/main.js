@@ -1,20 +1,17 @@
-import { getPicturesByQuery } from './js/pixabay-api';
-import { showImages } from './js/render-functions';
-
-// Описаний у документації
 import iziToast from 'izitoast';
-// Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
-
-// Описаний у документації
+import { getPicturesByQuery } from './js/pixabay-api';
+import { showImages} from './js/render-functions';
 import SimpleLightbox from 'simplelightbox';
-// Додатковий імпорт стилів
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import cautionSvg from './img/caution.svg';
+import errorSvg from './img/error.svg';
 
-export const searchForm = document.querySelector('.form');
-export const formInput = document.querySelector('.form-input');
-export const loader = document.querySelector('.loader');
-export const gallery = document.querySelector('.gallery');
+const searchForm  = document.querySelector('.form');
+const gallery = document.querySelector('.gallery');
+const preloader = document.querySelector('.loader-wrap');
+const loadMoreBtn = document.querySelector('.load-more-btn');
+
 
 //Підключення бібліотеки для відображення галереї, що гортається
 const lightbox = new SimpleLightbox('.gallery a', {
@@ -30,13 +27,13 @@ const params = {
   max_page: 0,
 };
 
-form.addEventListener('submit', handlerSubmit); //Прослуховувач форми
+searchForm.addEventListener('submit', handlerSubmit); //Прослуховувач форми
 
 async function handlerSubmit(event) {
   event.preventDefault(); //Запобігаємо дефолтному перезавантаженню сторінки
   gallery.innerHTML = ''; //очищаємо вміст галереї перед новим пошуком
   params.page = 1; // Після кожного нового запиту номер сторінки має скидатися до 1
-  params.query = form.elements.input.value.trim(); //Запит користувача
+//   params.query = searchForm.elements.input.value.trim(); //Запит користувача
   loadMoreBtn.style.display = 'none'; //прибираємо кнопку, щоб вона не спливала після 2го сабміту
   loadMoreBtn.removeEventListener('click', handlerLoadMore); // нема кнопки - нема слухача
 
@@ -55,7 +52,7 @@ async function handlerSubmit(event) {
       close: false,
       closeOnClick: true,
     });
-    form.reset();
+    searchForm.reset();
     return;
   }
 
@@ -105,7 +102,7 @@ async function handlerSubmit(event) {
           timeout: 6000,
         });
       }
-      gallery.innerHTML = renderGalleryCard(picture.hits); //Виклик функції для створення розмітки
+      gallery.innerHTML = showImages(picture.hits); //Виклик функції для створення розмітки
       lightbox.refresh(); //Метод бібліотеки SimpleLightbox, який видаляє і повторно ініціалізує лайтбокс
     }
     //Інформуємо користувача у разі виникнення помилки
@@ -124,7 +121,7 @@ async function handlerSubmit(event) {
       closeOnClick: true,
     });
   } finally {
-    form.reset(); //Оновлення поля форми
+    searchForm.reset(); //Оновлення поля форми
     preloader.style.display = 'none'; //Видалення прелоадера після завантаження картинок
   }
 }
@@ -135,7 +132,7 @@ async function handlerLoadMore() {
   loadMoreBtn.style.display = 'none'; // Приховуємо кнопку
   try {
     const picture = await getPicturesByQuery(params); //НТТР запит, отримуємо об'єкт у відповідь
-    gallery.insertAdjacentHTML('beforeend', renderGalleryCard(picture.hits)); // Малюємо розмітку
+    gallery.insertAdjacentHTML('beforeend', showImages(picture.hits)); // Малюємо розмітку
     lightbox.refresh(); // Перезбираємо лайтбокс
 
     //! плавний скролл
