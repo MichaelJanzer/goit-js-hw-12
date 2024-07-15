@@ -4,8 +4,8 @@ import { getPicturesByQuery } from './js/pixabay-api';
 import { showImages} from './js/render-functions';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import cautionSvg from './img/caution.svg';
-import errorSvg from './img/error.svg';
+// import cautionSvg from './img/caution.svg';
+// import errorSvg from './img/error.svg';
 
 const searchForm  = document.querySelector('.form');
 const gallery = document.querySelector('.gallery');
@@ -48,7 +48,7 @@ async function handlerSubmit(event) {
       messageSize: '16px',
       position: 'topRight',
       backgroundColor: 'rgba(255, 160, 0, 0.6)',
-      iconUrl: cautionSvg,
+    //   iconUrl: cautionSvg,
       close: false,
       closeOnClick: true,
     });
@@ -72,7 +72,7 @@ async function handlerSubmit(event) {
         messageSize: '16px',
         position: 'bottomRight',
         backgroundColor: 'rgba(239, 64, 64, 0.6)',
-        iconUrl: errorSvg,
+        // iconUrl: errorSvg,
         close: false,
         closeOnClick: true,
       });
@@ -96,7 +96,7 @@ async function handlerSubmit(event) {
           messageSize: '16px',
           position: 'bottomCenter',
           backgroundColor: 'rgba(70, 130, 180, 0.8)',
-          iconUrl: cautionSvg,
+        //   iconUrl: cautionSvg,
           close: false,
           closeOnClick: true,
           timeout: 6000,
@@ -116,7 +116,7 @@ async function handlerSubmit(event) {
       messageSize: '16px',
       position: 'bottomRight',
       backgroundColor: 'rgba(239, 64, 64, 0.6)',
-      iconUrl: errorSvg,
+    //   iconUrl: errorSvg,
       close: false,
       closeOnClick: true,
     });
@@ -153,7 +153,7 @@ async function handlerLoadMore() {
       messageSize: '16px',
       position: 'bottomRight',
       backgroundColor: 'rgba(239, 64, 64, 0.6)',
-      iconUrl: errorSvg,
+    //   iconUrl: errorSvg,
       close: false,
       closeOnClick: true,
     });
@@ -174,7 +174,7 @@ async function handlerLoadMore() {
         messageSize: '16px',
         position: 'bottomCenter',
         backgroundColor: 'rgba(70, 130, 180, 0.8)',
-        iconUrl: cautionSvg,
+        // iconUrl: cautionSvg,
         close: false,
         closeOnClick: true,
         timeout: 6000,
