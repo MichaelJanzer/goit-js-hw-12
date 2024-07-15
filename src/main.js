@@ -1,16 +1,20 @@
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
 import { getPicturesByQuery } from './js/pixabay-api';
-import { renderGalleryCard } from './js/render-functions';
-import errorSvg from './img/error.svg';
-import cautionSvg from './img/caution.svg';
+import { showImages } from './js/render-functions';
+
+// Описаний у документації
+import iziToast from 'izitoast';
+// Додатковий імпорт стилів
+import 'izitoast/dist/css/iziToast.min.css';
+
+// Описаний у документації
 import SimpleLightbox from 'simplelightbox';
+// Додатковий імпорт стилів
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-const form = document.querySelector('.form');
-const gallery = document.querySelector('.gallery');
-const preloader = document.querySelector('.loader-wrap');
-const loadMoreBtn = document.querySelector('.load-more-btn');
+export const searchForm = document.querySelector('.form');
+export const formInput = document.querySelector('.form-input');
+export const loader = document.querySelector('.loader');
+export const gallery = document.querySelector('.gallery');
 
 //Підключення бібліотеки для відображення галереї, що гортається
 const lightbox = new SimpleLightbox('.gallery a', {

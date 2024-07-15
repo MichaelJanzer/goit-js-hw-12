@@ -42,5 +42,5 @@ export function showImages(arr) {
       }
     )
     .join('');
-  gallery.innerHTML = markup;
+  
 }

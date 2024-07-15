@@ -4,25 +4,32 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>goit-js-hw-12</title>
+  <title>goit-js-hw-11</title>
   <link rel="stylesheet" href="./css/styles.css" />
+
 </head>
 
 <body>
-  <div class="container">
-    <form class="form">
-      <input type="text" id="search" name="input" placeholder="Search images..." />
-      <button type="submit" class="submit-btn">Search</button>
-    </form>
-    <ul class="gallery"></ul>
-
-    <button type="button" class="load-more-btn">Load more</button>
-    <div class="loader-wrap">
-      <span class="preloader"></span>
-      <span class="loader">Loading images, please wait...</span>
+  <form class="form">
+    <div class="form-search">
+      <input type="text" class="form-input" name="query" placeholder="Search images..." />
     </div>
-  
+
+    <button type="submit" class="btn-search">Search</button>
+  </form>
+
+  <span class="loader"></span>
+  <ul class="gallery"></ul>
+
+  <script type="module" src="./main.js"></script>
+</body>
+
+</html>
   </div>
 
   <script type="module" src="./main.js"></script>
