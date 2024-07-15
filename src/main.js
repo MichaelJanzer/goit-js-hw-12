@@ -33,7 +33,7 @@ async function handlerSubmit(event) {
   event.preventDefault(); //Запобігаємо дефолтному перезавантаженню сторінки
   gallery.innerHTML = ''; //очищаємо вміст галереї перед новим пошуком
   params.page = 1; // Після кожного нового запиту номер сторінки має скидатися до 1
-  params.query = searchForm.elements.input.value.trim(); //Запит користувача
+  params.query = searchForm.elements.query.value.trim(); //Запит користувача
   loadMoreBtn.style.display = 'none'; //прибираємо кнопку, щоб вона не спливала після 2го сабміту
   loadMoreBtn.removeEventListener('click', handlerLoadMore); // нема кнопки - нема слухача
 
