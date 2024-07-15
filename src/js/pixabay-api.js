@@ -1,20 +1,25 @@
 import axios from 'axios';
 
-const apiKey = '44869216-4addd85d29d39c45ae242764b'; // Ваш API ключ
+const BASE_URL = 'https://pixabay.com/api/';
+const API_KEY = '44869216-4addd85d29d39c45ae242764b';
 
-export function getPicturesByQuery({
-  query = '',
-  page = 1,
-  per_page = 15,
-} = {}) {
-  const FullURL = `https://pixabay.com/api/?key=${apiKey}&q=${encodeURIComponent(query)}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${per_page}`;
+export async function getPicturesByQuery(imageName, page = 1) {
+  const params = {
+    key: API_KEY,
+    q: imageName,
+    image_type: 'photo',
+    orientation: 'horizontal',
+    safesearch: true,
+    page: page,
+    per_page: 15
+  };
 
-  return axios
-    .get(FullURL)
-    .then(({ data }) => data)
-    .catch(error => {
-      throw new Error(`Error fetching pictures: ${error}`);
-    });
+  try {
+    const response = await axios.get(BASE_URL, { params });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 
