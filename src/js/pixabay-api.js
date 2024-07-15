@@ -1,17 +1,22 @@
 import axios from 'axios';
 
+const apiKey = '44869216-4addd85d29d39c45ae242764b'; // Ваш API ключ
+
 export function getPicturesByQuery({
   query = '',
   page = 1,
   per_page = 15,
 } = {}) {
-  const apiKey = '44869216-4addd85d29d39c45ae242764b'; // Ваш API ключ
-  const FullURL = `https://pixabay.com/api/?key=${apiKey}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true`;
+  const FullURL = `https://pixabay.com/api/?key=${apiKey}&q=${encodeURIComponent(query)}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${per_page}`;
 
   return axios
-    .get(FullURL, { params: { page, per_page } })
-    .then(({ data }) => data);
+    .get(FullURL)
+    .then(({ data }) => data)
+    .catch(error => {
+      throw new Error(`Error fetching pictures: ${error}`);
+    });
 }
+
 
 
 
